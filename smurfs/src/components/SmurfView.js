@@ -8,14 +8,14 @@ import { getAction} from '../actions'
 class SmurfView extends React.Component {
 
   componentDidMount() {
-    getAction()
+    this.props.getAction()
   };
   
   render() {
     return (
       <div className="SmurfList_wrapper">
-        <SmurfList smurfs={this.props.smurfs} />
         <SmurfForm />
+        <SmurfList smurfs={this.props.smurfs} />
       </div>
     );
   };
@@ -31,6 +31,6 @@ function mapStateToProps(state){
 
 
 export default connect(
-  mapStateToProps, getAction
+  mapStateToProps, {getAction}
 
 )(SmurfView);
