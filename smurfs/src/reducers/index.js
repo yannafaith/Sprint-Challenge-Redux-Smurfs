@@ -1,11 +1,10 @@
-import {GET_SUCCESS, GET_FAILURE, POST_SUCCESS, POST_FAILURE} from '../actions';
+import {GET_SUCCESS, GET_FAILURE, POST_SUCCESS, POST_FAILURE, DELETE_FAILURE, DELETE_SUCCESS} from '../actions';
 
 const initialState = {
    smurfs: [],
    gettingSmurfs: false,
    addingSmurf: false,
-   // updatingSmurf: false,
-   // deletingSmurf: false,
+   deletingSmurf: false,
    error: null
  };
 
@@ -35,9 +34,21 @@ const initialState = {
           error: action.payload,
           addingSmurf: false
         };
+        case DELETE_FAILURE:
+        return {
+          ...state, 
+          error: action.payload,
+          deletingSmurf: false
+        };
+        case DELETE_SUCCESS:
+        return {
+          ...state, 
+          error: '',
+          smurfs: action.payload,
+          deletingSmurf: true
+        };
         default: return state;
       };
     };
-
 
  export default rootReducer;

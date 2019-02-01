@@ -6,9 +6,6 @@ import { getAction} from '../actions'
 
 
 class SmurfView extends React.Component {
-  constructor() {
-    super();
-  };
 
   componentDidMount() {
     getAction()

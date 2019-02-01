@@ -1,7 +1,37 @@
 import React from "react";
+import {deleteAction} from '../actions'
+import {connect} from 'react-redux';
 
-const Smurf = props => {
-  return <div> <p>{props.smurf.name}</p> <p>{props.smurf.age}</p><p>{props.smurf.height}</p></div>;
+class Smurf extends React.Component {
+
+  deleteHandler = (smurf) => {
+    console.log('here!')
+    this.props.deleteAction(smurf)
+    window.location.reload()
+  };
+
+  render() {
+    return (
+      <div> 
+      <p>{this.props.smurf.name}</p> 
+      <p>{this.props.smurf.age}</p>
+      <p>{this.props.smurf.height}</p>
+      <button onClick={() => this.deleteHandler(this.props.smurf.id)}>
+        Delete Smurf</button>
+    </div>
+    );
+  }
 };
 
-export default Smurf;
+function mapStateToProps(state){
+  return {
+    smurfs: state.smurfs,
+    error: state.error,
+  };
+};
+
+
+export default connect(
+  mapStateToProps, {deleteAction}
+
+)(Smurf);
